@@ -26,20 +26,37 @@ DynamicArray::DynamicArray(const DynamicArray& cp) {
 	std::cout << "_________________Copy ctor called:" << std::endl;
 }
 
-//Copy assignment operator
+//Copy assignment operator Scott Meyers version
 DynamicArray& DynamicArray::operator=(const DynamicArray& cpAsOp) {
 	if(this != &cpAsOp) {
-		delete[] _arr;
+		int* arrOrigin = _arr;
+
 		_size = cpAsOp._size;
 		_capacity = cpAsOp._capacity;
 		_arr = new int[_capacity];
 		for(int i = 0; i < _size; ++i) {
 			_arr[i] = cpAsOp._arr[i];
 		}
+		delete[] arrOrigin;
 	}
 	std::cout << "__________________Copy assignment operator called:" << std::endl;
 	return *this;
 }
+
+//Copy assignment operator my version
+// DynamicArray& DynamicArray::operator=(const DynamicArray& cpAsOp) {
+// 	if(this != &cpAsOp) {	
+// 		delete[] _arr;
+// 		_size = cpAsOp._size;
+// 		_capacity = cpAsOp._capacity;
+// 		_arr = new int[_capacity];	
+// 		for(int i = 0; i < _size; ++i) {
+// 			_arr[i] = cpAsOp._arr[i];
+// 		}
+// 	}
+// 	std::cout << "__________________Copy assignment operator called:" << std::endl;
+// 	return *this;
+// }
 
 //Move constructor
 DynamicArray::DynamicArray(DynamicArray&& mv) noexcept {
